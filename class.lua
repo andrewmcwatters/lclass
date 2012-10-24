@@ -1,3 +1,8 @@
+-------------------------------------------------------------------------------
+-- Lua with Classes
+-- lclass
+-- Author: Andrew McWatters
+-------------------------------------------------------------------------------
 local setmetatable = setmetatable
 local rawget = rawget
 local getfenv = getfenv
