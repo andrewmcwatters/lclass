@@ -32,7 +32,7 @@ Creating metamethods
 --------------------
 
 	function upperclass:__tostring()
-		return "upperclass: the best class implementation in Lua. ever."
+		return "upperclass: The best class implementation in Lua. Ever."
 	end
 
 Creating an instance of a class
