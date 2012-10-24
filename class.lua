@@ -34,7 +34,8 @@ function class( name )
 		__call	= function( _, ... )
 			-- Create a new instance of this object
 			local object = __new( metatable )
-			-- Call its constructor (function name:name( ... ) ... end) if it exists
+			-- Call its constructor (function name:name( ... ) ... end) if it
+			-- exists
 			local v = rawget( metatable, name )
 			if ( v ~= nil ) then v( object, ... ) end
 			-- Return the new instance
@@ -43,8 +44,13 @@ function class( name )
 	} )
 	-- Make the class available to the environment from which it was defined
 	getfenv( 2 )[ name ] = metatable
+	-- For syntactic sugar, return a function to set inheritance
 	return function( base )
+		-- Set our base class to the class definition in the function
+		-- environment we called from
 		metatable.__base = getfenv( 2 )[ base ]
+		-- Overwrite our existing __index metamethod with one which checks our
+		-- members, metatable, and base class, in that order
 		metatable.__index = function( table, key )
 			local h
 			if ( type( table ) == "table" ) then
