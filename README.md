@@ -9,16 +9,21 @@ Usage
 Creating a class
 ----------------
 
-	class( "highclass" )
+	class( "upperclass" )
 
-or
+...or
 
-	class "highclass"
+	class "upperclass"
+
+...or with inheritance!
+
+	-- Inherit from existing class "power"
+	class "upperclass" ( "power" )
 
 Creating a constructor
 ----------------------
 
-	function highclass:highclass()
+	function upperclass:upperclass()
 		self.better = true
 		self.simple = "very yes"
 	end
@@ -26,11 +31,11 @@ Creating a constructor
 Creating metamethods
 --------------------
 
-	function highclass:__tostring()
-		return "highclass: the best class implementation in Lua. ever."
+	function upperclass:__tostring()
+		return "upperclass: the best class implementation in Lua. ever."
 	end
 
 Creating an instance of a class
 -------------------------------
 
-	local hc = highclass()
+	local uc = upperclass()
