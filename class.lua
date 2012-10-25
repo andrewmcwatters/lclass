@@ -10,6 +10,7 @@ local pcall = pcall
 local unpack = unpack
 local rawget = rawget
 local getfenv = getfenv
+local ipairs = ipairs
 
 -------------------------------------------------------------------------------
 -- __new()
@@ -105,7 +106,7 @@ function class( name )
 			end
 		end
 		-- Create inheritable metamethods
-		for _, event in pairs( eventnames ) do
+		for _, event in ipairs( eventnames ) do
 			metatable[ event ] = __metamethod( metatable, event )
 		end
 	end
