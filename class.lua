@@ -4,9 +4,12 @@
 -- Author: Andrew McWatters
 -------------------------------------------------------------------------------
 local setmetatable = setmetatable
+local type = type
+local error = error
+local pcall = pcall
+local unpack = unpack
 local rawget = rawget
 local getfenv = getfenv
-local type = type
 
 -------------------------------------------------------------------------------
 -- __new()
