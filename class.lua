@@ -11,13 +11,47 @@ local type = type
 -------------------------------------------------------------------------------
 -- __new()
 -- Purpose: Creates a new object
--- Inpput: metatable
+-- Input: metatable
 -- Output: object
 -------------------------------------------------------------------------------
 local function __new( metatable )
 	local members = {}
 	setmetatable( members, metatable )
 	return members
+end
+
+-------------------------------------------------------------------------------
+-- eventnames
+-- Purpose: Provide a list of all inheritable internal event names
+-------------------------------------------------------------------------------
+local eventnames = {
+	"__eq",
+	"__add", "__sub", "__mul", "__div", "__mod",
+	"__pow", "__unm", "__len", "__lt", "__le",
+	"__concat", "__call",
+	"__tostring"
+}
+
+-------------------------------------------------------------------------------
+-- __metamethod()
+-- Purpose: Creates a filler metamethod for metamethod inheritance
+-- Input: class - The class metatable
+--		  eventname - The event name
+-- Output: function
+-------------------------------------------------------------------------------
+local function __metamethod( class, eventname )
+	return function( ... )
+		local event = class.__base[ eventname ]
+		if ( type( event ) ~= "function" ) then
+			error( "attempt to call unimplemented metamethod '" .. eventname .. "'", 2 )
+		end
+		local returns = { pcall( event, ... ) }
+		if ( returns[ 1 ] ~= true ) then
+			error( returns[ 2 ], 2 )
+		else
+			return unpack( returns, 2 )
+		end
+	end
 end
 
 -------------------------------------------------------------------------------
@@ -66,6 +100,10 @@ function class( name )
 			else
 				return h[ key ]
 			end
+		end
+		-- Create inheritable metamethods
+		for _, event in pairs( eventnames ) do
+			metatable[ event ] = __metamethod( metatable, event )
 		end
 	end
 end
