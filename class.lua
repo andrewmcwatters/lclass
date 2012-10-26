@@ -29,7 +29,6 @@ end
 -- Purpose: Provide a list of all inheritable internal event names
 -------------------------------------------------------------------------------
 local eventnames = {
-	"__eq",
 	"__add", "__sub", "__mul", "__div", "__mod",
 	"__pow", "__unm", "__len", "__lt", "__le",
 	"__concat", "__call",
