@@ -19,9 +19,9 @@ local ipairs = ipairs
 -- Output: object
 -------------------------------------------------------------------------------
 local function __new( metatable )
-	local members = {}
-	setmetatable( members, metatable )
-	return members
+	local object = {}
+	setmetatable( object, metatable )
+	return object
 end
 
 -------------------------------------------------------------------------------
