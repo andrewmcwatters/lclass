@@ -85,7 +85,12 @@ function class( name )
 	return function( base )
 		-- Set our base class to the class definition in the function
 		-- environment we called from
-		metatable.__base = getfenv( 2 )[ base ]
+		if ( type( base ) == "string" ) then
+			metatable.__base = getfenv( 2 )[ base ]
+		else
+			-- Otherwise set the base class directly
+			metatable.__base = base
+		end
 		-- Overwrite our existing __index metamethod with one which checks our
 		-- members, metatable, and base class, in that order
 		metatable.__index = function( table, key )
