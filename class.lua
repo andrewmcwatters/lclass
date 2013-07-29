@@ -91,9 +91,9 @@ function class( name )
 			-- Otherwise set the base class directly
 			metatable.__base = base
 		end
-		-- Overwrite our existing __index metamethod with one which checks our
-		-- members, metatable, and base class, in that order, a la behavior via
-		-- the Lua 5.1 manual's illustrative code for indexing access
+		-- Overwrite our existing __index value with a metamethod which checks
+		-- our members, metatable, and base class, in that order, a la behavior
+		-- via the Lua 5.1 manual's illustrative code for indexing access
 		metatable.__index = function( table, key )
 			local h
 			if ( type( table ) == "table" ) then
