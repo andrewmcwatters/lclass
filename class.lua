@@ -13,12 +13,12 @@ local getfenv = getfenv
 local ipairs = ipairs
 
 -------------------------------------------------------------------------------
--- __new()
+-- new()
 -- Purpose: Creates a new object
 -- Input: metatable
 -- Output: object
 -------------------------------------------------------------------------------
-local function __new( metatable )
+local function new( metatable )
 	local object = {}
 	setmetatable( object, metatable )
 	return object
@@ -36,13 +36,13 @@ local eventnames = {
 }
 
 -------------------------------------------------------------------------------
--- __metamethod()
+-- metamethod()
 -- Purpose: Creates a filler metamethod for metamethod inheritance
 -- Input: class - The class metatable
 --		  eventname - The event name
 -- Output: function
 -------------------------------------------------------------------------------
-local function __metamethod( class, eventname )
+local function metamethod( class, eventname )
 	return function( ... )
 		local event = class.__base[ eventname ]
 		if ( type( event ) ~= "function" ) then
@@ -63,14 +63,14 @@ end
 -- Input: name - Name of new class
 -------------------------------------------------------------------------------
 function class( name )
-	local metatable		= {}
-	metatable.__index	= metatable
-	metatable.__type	= name
+	local metatable	  = {}
+	metatable.__index = metatable
+	metatable.__type  = name
 	-- Create a shortcut to name()
 	setmetatable( metatable, {
-		__call	= function( _, ... )
+		__call = function( _, ... )
 			-- Create a new instance of this object
-			local object = __new( metatable )
+			local object = new( metatable )
 			-- Call its constructor (function name:name( ... ) ... end) if it
 			-- exists
 			local v = rawget( metatable, name )
@@ -102,7 +102,7 @@ function class( name )
 				v = rawget( metatable, key )
 				if ( v ~= nil ) then return v end
 				h = rawget( metatable.__base, "__index" )
-				if h == nil then return nil end
+				if ( h == nil ) then return nil end
 			end
 			if ( type( h ) == "function" ) then
 				return h( table, key )
@@ -112,7 +112,7 @@ function class( name )
 		end
 		-- Create inheritable metamethods
 		for _, event in ipairs( eventnames ) do
-			metatable[ event ] = __metamethod( metatable, event )
+			metatable[ event ] = metamethod( metatable, event )
 		end
 	end
 end
