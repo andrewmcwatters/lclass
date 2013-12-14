@@ -45,8 +45,10 @@ local eventnames = {
 local function metamethod( class, eventname )
 	return function( ... )
 		local event = class.__base[ eventname ]
-		if ( type( event ) ~= "function" ) then
-			error( "attempt to call unimplemented metamethod '" .. eventname .. "'", 2 )
+		local type = type( event )
+		if ( type ~= "function" ) then
+			error( "attempt to call metamethod '" .. eventname .. "' " ..
+				   "(a " .. type .. " value)", 2 )
 		end
 		local returns = { pcall( event, ... ) }
 		if ( returns[ 1 ] ~= true ) then
@@ -63,9 +65,9 @@ end
 -- Input: name - Name of new class
 -------------------------------------------------------------------------------
 function class( name )
-	local metatable	  = {}
+	local metatable = {}
 	metatable.__index = metatable
-	metatable.__type  = name
+	metatable.__type = name
 	-- Create a shortcut to name()
 	setmetatable( metatable, {
 		__call = function( _, ... )
@@ -74,7 +76,14 @@ function class( name )
 			-- Call its constructor (function name:name( ... ) ... end) if it
 			-- exists
 			local v = rawget( metatable, name )
-			if ( v ~= nil ) then v( object, ... ) end
+			if ( v ~= nil ) then
+				local type = type( v )
+				if ( type ~= "function" ) then
+					error( "attempt to call constructor '" .. name .. "' " ..
+						   "(a " .. type .. " value)", 2 )
+				end
+				v( object, ... )
+			end
 			-- Return the new instance
 			return object
 		end
