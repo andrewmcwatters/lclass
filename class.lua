@@ -38,8 +38,8 @@ local eventnames = {
 -------------------------------------------------------------------------------
 -- metamethod()
 -- Purpose: Creates a filler metamethod for metamethod inheritance
--- Input: class - The class metatable
---		  eventname - The event name
+-- Input: class - Class metatable
+--		  eventname - Event name
 -- Output: function
 -------------------------------------------------------------------------------
 local function metamethod( class, eventname )
@@ -48,7 +48,7 @@ local function metamethod( class, eventname )
 		local type = type( event )
 		if ( type ~= "function" ) then
 			error( "attempt to call metamethod '" .. eventname .. "' " ..
-				   "(a " .. type .. " value)", 2 )
+			       "(a " .. type .. " value)", 2 )
 		end
 		local returns = { pcall( event, ... ) }
 		if ( returns[ 1 ] ~= true ) then
@@ -80,7 +80,7 @@ function class( name )
 				local type = type( v )
 				if ( type ~= "function" ) then
 					error( "attempt to call constructor '" .. name .. "' " ..
-						   "(a " .. type .. " value)", 2 )
+					       "(a " .. type .. " value)", 2 )
 				end
 				v( object, ... )
 			end
