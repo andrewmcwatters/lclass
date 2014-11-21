@@ -58,5 +58,5 @@ Creating an instance of a class
 -------------------------------
 
 ```lua
-	local a = amphibian()
+local a = amphibian()
 ```
