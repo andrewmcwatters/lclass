@@ -3,8 +3,8 @@ lclass
 
 Lua with Classes
 
-About lclass
-============
+About
+=====
 
 lclass is a class implementation for Lua 5.1. It has been designed to be the
 simplest, most comprehensive, and smallest class implementation for Lua. lclass
@@ -42,6 +42,15 @@ Creating a constructor
 function amphibian:amphibian()
 	self.kingdom = "Animalia"
 	self.class = "Amphibia"
+end
+```
+
+Creating methods
+--------------------
+
+```lua
+function amphibian:swim()
+	print( "Splash!" )
 end
 ```
 
