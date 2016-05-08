@@ -1,10 +1,8 @@
-lclass
-======
+# lclass
 
 Lua with Classes
 
-About
-=====
+## About
 
 lclass is a class implementation for Lua 5.1. It has been designed to be the
 simplest, most comprehensive, and smallest class implementation for Lua. lclass
@@ -12,11 +10,9 @@ accomplishes these goals without fluff. The source also conveniently provides
 thorough documentation and commenting to explain each piece of functionality,
 from how creating instances of classes works, down to inheritable metamethods.
 
-Usage
-=====
+## Usage
 
-Creating a class
-----------------
+### Creating a class
 
 ```lua
 class( "amphibian" )
@@ -35,8 +31,7 @@ class "amphibian"
 class "amphibian" ( "animal" )
 ```
 
-Creating a constructor
-----------------------
+### Creating a constructor
 
 ```lua
 function amphibian:amphibian()
@@ -45,8 +40,7 @@ function amphibian:amphibian()
 end
 ```
 
-Creating methods
---------------------
+### Creating methods
 
 ```lua
 function amphibian:swim()
@@ -54,8 +48,7 @@ function amphibian:swim()
 end
 ```
 
-Creating metamethods
---------------------
+### Creating metamethods
 
 ```lua
 function amphibian:__tostring()
@@ -63,15 +56,13 @@ function amphibian:__tostring()
 end
 ```
 
-Creating an instance of a class
--------------------------------
+### Creating an instance of a class
 
 ```lua
 local a = amphibian()
 ```
 
-License
-=======
+## License
 
 The MIT License (MIT)
 
