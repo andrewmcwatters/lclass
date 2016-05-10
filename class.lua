@@ -140,7 +140,7 @@ function class( name )
 		-- Overwrite our existing __index value with a metamethod which checks
 		-- our members, metatable, and base class, in that order, a la behavior
 		-- via the Lua 5.1 manual's illustrative code for indexing access
-		metatable.__index = function( table, key )
+		classes[ name ].__index = function( table, key )
 			local v = rawget( classes[ name ], key )
 			if ( v ~= nil ) then return v end
 			local h = rawget( getbaseclass( classes[ name ] ), "__index" )
