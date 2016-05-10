@@ -47,16 +47,13 @@ local eventnames = {
 local function metamethod( class, eventname )
 	return function( ... )
 		local event = nil
-		local base = nil
-		if ( class.__base ) then
-			base = getbaseclass( class )
-			while ( base ~= nil ) do
-				if ( base[ eventname ] ) then
-					event = base[ eventname ]
-					break
-				end
-				base = getbaseclass( base )
+		local base = getbaseclass( class )
+		while ( base ~= nil ) do
+			if ( base[ eventname ] ) then
+				event = base[ eventname ]
+				break
 			end
+			base = getbaseclass( base )
 		end
 		local type = type( event )
 		if ( type ~= "function" ) then
