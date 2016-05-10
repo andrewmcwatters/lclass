@@ -104,13 +104,10 @@ function class( name )
 		-- our members, metatable, and base class, in that order, a la behavior
 		-- via the Lua 5.1 manual's illustrative code for indexing access
 		metatable.__index = function( table, key )
-			local h
-			if ( type( table ) == "table" ) then
-				local v = rawget( metatable, key )
-				if ( v ~= nil ) then return v end
-				h = rawget( metatable.__base, "__index" )
-				if ( h == nil ) then return nil end
-			end
+			local v = rawget( metatable, key )
+			if ( v ~= nil ) then return v end
+			local h = rawget( metatable.__base, "__index" )
+			if ( h == nil ) then return nil end
 			if ( type( h ) == "function" ) then
 				return h( table, key )
 			else
