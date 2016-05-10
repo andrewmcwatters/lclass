@@ -106,9 +106,7 @@ function class( name )
 		metatable.__index = function( table, key )
 			local h
 			if ( type( table ) == "table" ) then
-				local v = rawget( table, key )
-				if ( v ~= nil ) then return v end
-				v = rawget( metatable, key )
+				local v = rawget( metatable, key )
 				if ( v ~= nil ) then return v end
 				h = rawget( metatable.__base, "__index" )
 				if ( h == nil ) then return nil end
