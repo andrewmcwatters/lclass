@@ -71,7 +71,7 @@ end
 -- classes
 -- Purpose: Store classes for real-time class redefining
 -------------------------------------------------------------------------------
-local classes = {}
+classes = {}
 
 -------------------------------------------------------------------------------
 -- getbaseclass()
@@ -79,12 +79,10 @@ local classes = {}
 -- Input: class - Class metatable
 -- Output: class
 -------------------------------------------------------------------------------
-local function getbaseclass( class )
+function getbaseclass( class )
 	local name = class.__base
 	return classes[ name ]
 end
-
-_G.getbaseclass = getbaseclass
 
 -------------------------------------------------------------------------------
 -- class()
