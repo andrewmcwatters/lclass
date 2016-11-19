@@ -3,36 +3,38 @@
 
 require( "class" )
 
+local print = print
+
 -------------------------------------------------------------------------------
 -- animal
 -------------------------------------------------------------------------------
-class "animal"
+module( "animal", package.class )
 
-function animal:animal()
+function _M:animal()
 	self.kingdom = "Animalia"
 end
 
-function animal:getKingdom()
+function _M:getKingdom()
 	return self.kingdom
 end
 
-local a = animal()
+local a = _M()
 print( a:getKingdom() )
 
 -------------------------------------------------------------------------------
 -- amphibian
 -- Base Class: animal
 -------------------------------------------------------------------------------
-class "amphibian" ( "animal" )
+module( "amphibian", package.class, package.inherit( "animal" ) )
 
-function amphibian:amphibian()
+function _M:amphibian()
 	self.kingdom = "Animalia"
 	self.class = "Amphibia"
 end
 
-function amphibian:getClass()
+function _M:getClass()
 	return self.class
 end
 
-local a = amphibian()
+local a = _M()
 print( a:getKingdom(), a:getClass() )

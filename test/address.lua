@@ -3,7 +3,13 @@
 
 require( "class" )
 
-class( "container" )
+local getmetatable = getmetatable
+local setmetatable = setmetatable
+local tostring     = tostring
+local string       = string
+local print        = print
+
+module( "container", package.class )
 
 function container:__tostring()
 	local t = getmetatable( self )

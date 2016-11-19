@@ -3,31 +3,33 @@
 
 require( "class" )
 
+local print = print
+
 -------------------------------------------------------------------------------
 -- vehicle
 -------------------------------------------------------------------------------
-class "vehicle"
+module( "vehicle", package.class )
 
-function vehicle:vehicle()
+function _M:vehicle()
 	self.name = "none"
 end
 
-function vehicle:__tostring()
+function _M:__tostring()
 	return "vehicle: " .. self.name
 end
 
-local v = vehicle()
+local v = _M()
 print( v )
 
 -------------------------------------------------------------------------------
 -- car
 -- Base Class: vehicle
 -------------------------------------------------------------------------------
-class "car" ( "vehicle" )
+module( "car", package.class, package.inherit( "vehicle" ) )
 
-function car:car()
+function _M:car()
 	self.name = "car"
 end
 
-local c = car()
+local c = _M()
 print( c )
