@@ -18,12 +18,6 @@ from how creating instances of classes works, down to inheritable metamethods.
 module( "amphibian", package.class )
 ```
 
-...or
-
-```lua
-module "amphibian"
-```
-
 ...or with inheritance
 
 ```lua
