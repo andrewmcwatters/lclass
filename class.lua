@@ -123,12 +123,8 @@ function package.inherit( base )
 		-- our members, metatable, and base class, in that order, a la behavior
 		-- via the Lua 5.1 manual's illustrative code for indexing access
 		module.__index = function( table, key )
-			local module = package.loaded[ module._NAME ]
-			local baseclass = getbaseclass( module )
-			if ( baseclass == nil ) then
-				error( "attempt to index class '" .. module.__base .. "' " ..
-				       "(a nil value)", 2 )
-			end
+			local v = rawget( module, key )
+			if ( v ~= nil ) then return v end
 			local h = rawget( getbaseclass( module ), "__index" )
 			if ( h == nil ) then return nil end
 			if ( type( h ) == "function" ) then

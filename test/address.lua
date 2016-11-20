@@ -11,7 +11,7 @@ local print        = print
 
 module( "container", package.class )
 
-function container:__tostring()
+function _M:__tostring()
 	local t = getmetatable( self )
 	setmetatable( self, {} )
 	local s = string.gsub( tostring( self ), "table", "container" )
@@ -19,5 +19,5 @@ function container:__tostring()
 	return s
 end
 
-local c = container()
+local c = _M()
 print( c )
