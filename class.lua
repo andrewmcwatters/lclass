@@ -87,7 +87,7 @@ _G.getbaseclass = getbaseclass
 -------------------------------------------------------------------------------
 function package.class( module )
 	module.__index = module
-	module.__type = module._NAME
+	module.__type = string.gsub( module._NAME, module._PACKAGE, "" )
 	-- Create a shortcut to name()
 	setmetatable( module, {
 		__call = function( self, ... )
@@ -95,7 +95,7 @@ function package.class( module )
 			local object = new( self )
 			-- Call its constructor (function name:name( ... ) ... end) if it
 			-- exists
-			local v = rawget( self, self._NAME )
+			local v = rawget( self, self.__type )
 			if ( v ~= nil ) then
 				local type = type( v )
 				if ( type ~= "function" ) then
