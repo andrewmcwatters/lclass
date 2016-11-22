@@ -95,14 +95,14 @@ function package.class( module )
 			local object = new( self )
 			-- Call its constructor (function name:name( ... ) ... end) if it
 			-- exists
-			local v = rawget( self, self.__type )
-			if ( v ~= nil ) then
-				local type = type( v )
+			local constructor = rawget( self, self.__type )
+			if ( constructor ~= nil ) then
+				local type = type( constructor )
 				if ( type ~= "function" ) then
 					error( "attempt to call constructor '" .. name .. "' " ..
 					       "(a " .. type .. " value)", 2 )
 				end
-				v( object, ... )
+				constructor( object, ... )
 			end
 			-- Return the new instance
 			return object
@@ -125,7 +125,12 @@ function package.inherit( base )
 		module.__index = function( table, key )
 			local v = rawget( module, key )
 			if ( v ~= nil ) then return v end
-			local h = rawget( getbaseclass( module ), "__index" )
+			local baseclass = getbaseclass( module )
+			if ( baseclass == nil ) then
+				error( "attempt to index base class '" .. base .. "' " ..
+					   "(a nil value)", 2 )
+			end
+			local h = rawget( baseclass, "__index" )
 			if ( h == nil ) then return nil end
 			if ( type( h ) == "function" ) then
 				return h( table, key )
