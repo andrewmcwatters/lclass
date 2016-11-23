@@ -14,7 +14,7 @@ local ipairs = ipairs
 
 -------------------------------------------------------------------------------
 -- new()
--- Purpose: Creates a new object
+-- Purpose: Creates an object
 -- Input: metatable
 -- Output: object
 -------------------------------------------------------------------------------
@@ -91,7 +91,7 @@ function package.class( module )
 	-- Create a shortcut to name()
 	setmetatable( module, {
 		__call = function( self, ... )
-			-- Create a new instance of this object
+			-- Create an instance of this object
 			local object = new( self )
 			-- Call its constructor (function name:name( ... ) ... end) if it
 			-- exists
@@ -104,7 +104,7 @@ function package.class( module )
 				end
 				constructor( object, ... )
 			end
-			-- Return the new instance
+			-- Return the instance
 			return object
 		end
 	} )
@@ -146,15 +146,23 @@ function package.inherit( base )
 end
 
 -------------------------------------------------------------------------------
+-- setmodule()
+-- Purpose: Creates a module
+-- Input: name - Name of mdoule
+-------------------------------------------------------------------------------
+local function setmodule( name )
+	module( name, package.class )
+end
+
+-------------------------------------------------------------------------------
 -- class()
--- Purpose: Creates a new class
--- Input: name - Name of new class
+-- Purpose: Creates a class
+-- Input: name - Name of class
 -------------------------------------------------------------------------------
 function class( name )
-	local setfenv = setfenv
-	local package = package
-	module( name, package.class )
+	setmodule( name )
 	-- Make the class available to the environment from which it was defined
+	local _M = package.loaded[ name ]
 	setfenv( 2, _M )
 	-- For syntactic sugar, return a function to set inheritance
 	return function( base )
