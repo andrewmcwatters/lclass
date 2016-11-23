@@ -146,21 +146,14 @@ function package.inherit( base )
 end
 
 -------------------------------------------------------------------------------
--- setmodule()
--- Purpose: Creates a module
--- Input: name - Name of mdoule
--------------------------------------------------------------------------------
-local function setmodule( name )
-	module( name, package.class )
-end
-
--------------------------------------------------------------------------------
 -- class()
 -- Purpose: Creates a class
 -- Input: name - Name of class
 -------------------------------------------------------------------------------
 function class( name )
-	setmodule( name )
+	local function setmodule( name )
+		module( name, package.class )
+	end setmodule( name )
 	-- Make the class available to the environment from which it was defined
 	local _M = package.loaded[ name ]
 	setfenv( 2, _M )
