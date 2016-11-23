@@ -144,3 +144,20 @@ function package.inherit( base )
 		end
 	end
 end
+
+-------------------------------------------------------------------------------
+-- class()
+-- Purpose: Creates a new class
+-- Input: name - Name of new class
+-------------------------------------------------------------------------------
+function class( name )
+	local setfenv = setfenv
+	local package = package
+	module( name, package.class )
+	-- Make the class available to the environment from which it was defined
+	setfenv( 2, _M )
+	-- For syntactic sugar, return a function to set inheritance
+	return function( base )
+		package.inherit( base )( _M )
+	end
+end
