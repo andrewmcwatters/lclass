@@ -15,20 +15,26 @@ from how creating instances of classes works, down to inheritable metamethods.
 ### Creating a class
 
 ```lua
-module( "amphibian", package.class )
+class( "amphibian" )
+```
+
+...or
+
+```lua
+class "amphibian"
 ```
 
 ...or with inheritance
 
 ```lua
 -- Inherit from existing class "animal"
-module( "amphibian", package.class, package.inherit( "animal" ) )
+class "amphibian" ( "animal" )
 ```
 
 ### Creating a constructor
 
 ```lua
-function _M:amphibian()
+function amphibian:amphibian()
 	self.kingdom = "Animalia"
 	self.class = "Amphibia"
 end
@@ -37,7 +43,7 @@ end
 ### Creating methods
 
 ```lua
-function _M:swim()
+function amphibian:swim()
 	print( "Splash!" )
 end
 ```
@@ -45,7 +51,7 @@ end
 ### Creating metamethods
 
 ```lua
-function _M:__tostring()
+function amphibian:__tostring()
 	return "amphibian: " .. self.class
 end
 ```
