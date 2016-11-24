@@ -154,11 +154,9 @@ function class( name )
 	local function setmodule( name )
 		module( name, package.class )
 	end setmodule( name )
-	-- Make the class available to the environment from which it was defined
-	local _M = package.loaded[ name ]
-	setfenv( 2, _M )
 	-- For syntactic sugar, return a function to set inheritance
 	return function( base )
+		local _M = package.loaded[ name ]
 		package.inherit( base )( _M )
 	end
 end
