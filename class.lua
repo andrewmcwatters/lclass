@@ -92,11 +92,11 @@ end
 local function setproxy( object )
 	local __newproxy = newproxy( true )
 	local metatable = getmetatable( __newproxy )
-    metatable.__gc = function()
+	metatable.__gc = function()
 		local metatable = getmetatable( object )
 		metatable.__gc( object )
 	end
-    object.__newproxy = __newproxy
+	object.__newproxy = __newproxy
 end
 
 _G.setproxy = setproxy
