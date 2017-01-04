@@ -3,7 +3,7 @@
 
 require( "class" )
 
-local print   = print
+local print = print
 
 -------------------------------------------------------------------------------
 -- animal
