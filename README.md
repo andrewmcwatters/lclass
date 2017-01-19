@@ -23,6 +23,8 @@ class "amphibian" ( "animal" )
 ### Creating a constructor
 ```lua
 function amphibian:amphibian()
+	-- Call the base class constructor
+	animal.animal( self )
 	self.kingdom = "Animalia"
 	self.class = "Amphibia"
 end
