@@ -9,9 +9,9 @@ local tostring     = tostring
 local string       = string
 local print        = print
 
-module( "container", package.class )
+class( "container" )
 
-function _M:__tostring()
+function container:__tostring()
 	local t = getmetatable( self )
 	setmetatable( self, {} )
 	local s = string.gsub( tostring( self ), "table", "container" )
@@ -19,5 +19,5 @@ function _M:__tostring()
 	return s
 end
 
-local c = _M()
+local c = container()
 print( c )

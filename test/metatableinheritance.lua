@@ -8,32 +8,28 @@ local print = print
 -------------------------------------------------------------------------------
 -- vehicle
 -------------------------------------------------------------------------------
-function defineVehicle()
-	module( "vehicle", package.class )
+class( "vehicle" )
 
-	function _M:vehicle()
-		self.name = "none"
-	end
+function vehicle:vehicle()
+	self.name = "none"
+end
 
-	function _M:__tostring()
-		return "vehicle: " .. self.name
-	end
+function vehicle:__tostring()
+	return "vehicle: " .. self.name
+end
 
-	local v = _M()
-	print( v )
-end defineVehicle()
+local v = vehicle()
+print( v )
 
 -------------------------------------------------------------------------------
 -- car
 -- Base Class: vehicle
 -------------------------------------------------------------------------------
-function defineCar()
-	module( "car", package.class, package.inherit "vehicle" )
+class "car" ( "vehicle" )
 
-	function _M:car()
-		self.name = "car"
-	end
+function car:car()
+	self.name = "car"
+end
 
-	local c = _M()
-	print( c )
-end defineCar()
+local c = car()
+print( c )

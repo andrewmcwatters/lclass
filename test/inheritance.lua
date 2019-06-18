@@ -8,37 +8,33 @@ local print = print
 -------------------------------------------------------------------------------
 -- animal
 -------------------------------------------------------------------------------
-function defineAnimal()
-	module( "animal", package.class )
+class( "animal" )
 
-	function _M:animal()
-		self.kingdom = "Animalia"
-	end
+function animal:animal()
+	self.kingdom = "Animalia"
+end
 
-	function _M:getKingdom()
-		return self.kingdom
-	end
+function animal:getKingdom()
+	return self.kingdom
+end
 
-	local a = _M()
-	print( a:getKingdom() )
-end defineAnimal()
+local a = animal()
+print( a:getKingdom() )
 
 -------------------------------------------------------------------------------
 -- amphibian
 -- Base Class: animal
 -------------------------------------------------------------------------------
-function defineAmphibian()
-	module( "amphibian", package.class, package.inherit "animal" )
+class "amphibian" ( "animal" )
 
-	function _M:amphibian()
-		self.kingdom = "Animalia"
-		self.class = "Amphibia"
-	end
+function amphibian:amphibian()
+	self.kingdom = "Animalia"
+	self.class = "Amphibia"
+end
 
-	function _M:getClass()
-		return self.class
-	end
+function amphibian:getClass()
+	return self.class
+end
 
-	local a = _M()
-	print( a:getKingdom(), a:getClass() )
-end defineAmphibian()
+local a = amphibian()
+print( a:getKingdom(), a:getClass() )
