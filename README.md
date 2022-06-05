@@ -4,7 +4,7 @@ Lua with Classes
 ## Usage
 ### Creating a class
 ```lua
-class( "amphibian" )
+class("amphibian")
 ```
 
 ...or
@@ -16,15 +16,15 @@ class "amphibian"
 ...or with inheritance
 
 ```lua
--- Inherit from existing class "animal"
-class "amphibian" ( "animal" )
+-- inherit from existing class "animal"
+class "amphibian" ("animal")
 ```
 
 ### Creating a constructor
 ```lua
 function amphibian:amphibian()
-	-- Call the base class constructor
-	animal.animal( self )
+	-- call the base class constructor
+	animal.animal(self)
 	self.kingdom = "Animalia"
 	self.class = "Amphibia"
 end
@@ -33,7 +33,7 @@ end
 ### Creating methods
 ```lua
 function amphibian:swim()
-	print( "Splash!" )
+	print("Splash!")
 end
 ```
 
@@ -52,7 +52,7 @@ local a = amphibian()
 ### Creating a garbage-collection metamethod
 ```lua
 function amphibian:amphibian()
-	setproxy( self )
+	setproxy(self)
 end
 
 function amphibian:__gc()
