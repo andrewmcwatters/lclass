@@ -22,25 +22,25 @@ class "amphibian" ("animal")
 
 ### Creating a constructor
 ```lua
-function amphibian:amphibian()
-	-- call the base class constructor
-	animal.animal(self)
-	self.kingdom = "Animalia"
-	self.class = "Amphibia"
+function amphibian:amphibian ()
+  -- call the base class constructor
+  animal.animal(self)
+  self.kingdom = "Animalia"
+  self.class   = "Amphibia"
 end
 ```
 
 ### Creating methods
 ```lua
-function amphibian:swim()
-	print("Splash!")
+function amphibian:swim ()
+  print("Splash!")
 end
 ```
 
 ### Creating metamethods
 ```lua
-function amphibian:__tostring()
-	return "amphibian: " .. self.class
+function amphibian:__tostring ()
+  return "amphibian: " .. self.class
 end
 ```
 
@@ -51,19 +51,19 @@ local a = amphibian()
 
 ### Creating a garbage-collection metamethod
 ```lua
-function amphibian:amphibian()
-	setproxy(self)
+function amphibian:amphibian ()
+  setproxy(self)
 end
 
 function amphibian:__gc()
-	-- ...
+  -- ...
 end
 ```
 
 ## License
 MIT License
 
-Copyright (c) 2020 Andrew McWatters
+Copyright (c) 2023 Andrew McWatters
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
