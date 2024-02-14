@@ -1,6 +1,14 @@
 # lclass
 Lua with Classes
 
+**lclass** has been in production environments for over a decade. It was
+designed specifically for use with PUC-Rio Lua 5.1 and LuaJIT and to be used
+alongside C++. It differs from all other known Lua class scripts in that classes
+created with it behave like classes bound and created with `luaL_register`.
+
+You are encouraged to read class.lua to understand its features. It is only 155
+lines.
+
 ## Usage
 ### Creating a class
 ```lua
@@ -63,7 +71,7 @@ end
 ## License
 MIT License
 
-Copyright (c) 2023 Andrew McWatters
+Copyright (c) 2024 Andrew McWatters
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
